@@ -9,6 +9,8 @@ from bcpp_clinic_labs.labs import panel_vl
 
 from .constants import INITIATION, MASA_VL_SCHEDULED
 
+app_label = 'bcpp_clinic_subject'
+
 
 @register()
 class QuestionnaireCrfRuleGroup(CrfRuleGroup):
@@ -17,11 +19,11 @@ class QuestionnaireCrfRuleGroup(CrfRuleGroup):
         predicate=P('registration_type', 'eq', MASA_VL_SCHEDULED),
         consequence=REQUIRED,
         alternative=NOT_REQUIRED,
-        target_models=['viralloadtracking'])
+        target_models=[f'{app_label}.viralloadtracking'])
 
     class Meta:
-        app_label = 'bcpp_clinic_subject'
-        source_model = 'bcpp_clinic_subject.questionnaire'
+        app_label = 'bcpp_clinic_metadata_rules'
+        source_model = f'{app_label}.questionnaire'
 
 
 @register()
@@ -36,9 +38,9 @@ class QuestionnaireRequisitionRuleGroup(RequisitionRuleGroup):
         target_panels=[panel_vl],)
 
     class Meta:
-        app_label = 'bcpp_clinic_subject'
+        app_label = 'bcpp_clinic_metadata_rules'
         source_model = 'bcpp_clinic_subject.questionnaire'
-        requisition_model = 'subjectrequisition'
+        requisition_model = f'{app_label}.subjectrequisition'
 
 
 @register()
@@ -48,8 +50,8 @@ class ViralLoadTrackingCrfRuleGroup(CrfRuleGroup):
         predicate=P('is_drawn', 'eq', YES),
         consequence=REQUIRED,
         alternative=NOT_REQUIRED,
-        target_models=['vlresult'])
+        target_models=[f'{app_label}.vlresult'])
 
     class Meta:
-        app_label = 'bcpp_clinic_subject'
-        source_model = 'bcpp_clinic_subject.viralloadtracking'
+        app_label = 'bcpp_clinic_metadata_rules'
+        source_model = f'{app_label}.viralloadtracking'
