@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'r$r3cukj-4nfp9t0yr!w_yxv_7++0f#3474bbmvhp#q6)67%q^'
+APP_NAME = 'bcpp_clinic_metadata_rules'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crypto_fields.apps.AppConfig',
+    'django_revision.apps.AppConfig',
+    'edc_base.apps.AppConfig',
+    'edc_visit_tracking.apps.AppConfig',
+    'edc_visit_schedule.apps.AppConfig',
+    'edc_protocol.apps.AppConfig',
+    'edc_identifier.apps.AppConfig',
+    'edc_timepoint.apps.AppConfig',
+    'edc_device.apps.AppConfig',
+    'edc_registration.apps.AppConfig',
+    'edc_reference.apps.AppConfig',
+    'bcpp_clinic_labs.apps.AppConfig',
+    'bcpp_clinic_reference.apps.AppConfig',
+    'bcpp_clinic_visit_schedule.apps.AppConfig',
+    'bcpp_clinic_metadata_rules.apps.EdcMetadataAppConfig',
     'bcpp_clinic_metadata_rules.apps.AppConfig',
 ]
 
@@ -119,3 +136,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+if 'test' in sys.argv:
+
+    MIGRATION_MODULES = {
+        'edc_identifier': None,
+        'bcpp_clinic_metadata_rules': None, }

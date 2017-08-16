@@ -5,9 +5,9 @@ from edc_metadata.rules.crf import CrfRuleGroup
 from edc_metadata.rules.decorators import register
 from edc_metadata.rules.predicate import P, PF
 from edc_metadata.rules.requisition import RequisitionRuleGroup
+from bcpp_clinic_labs.labs import panel_vl
 
-from ..constants import INITIATION, MASA_VL_SCHEDULED
-from ..labs import panel_vl
+from .constants import INITIATION, MASA_VL_SCHEDULED
 
 
 @register()
