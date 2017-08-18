@@ -43,12 +43,6 @@ class QuestionnaireRequisitionRuleGroup(RequisitionRuleGroup):
 
     initiation = RequisitionRule(
         predicate=P('registration_type', 'eq', MASA_VL_SCHEDULED),
-        consequence=REQUIRED,
-        alternative=NOT_REQUIRED,
-        target_panels=[panel_rbd],)
-
-    initiation = RequisitionRule(
-        predicate=P('registration_type', 'eq', MASA_VL_SCHEDULED),
         consequence=NOT_REQUIRED,
         alternative=REQUIRED,
         target_panels=[panel_vl],)
